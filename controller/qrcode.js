@@ -67,7 +67,7 @@ exports.scan = async (req, res, next)=>{
         await Qrcode.findOneAndUpdate({
             _id: qrcodeData._id,
             isActive: true,
-            connectedDeviceId: ConnectedDevice._id,
+            connectedDeviceId: connectDevice._id,
             lastUsedDate: new date
         });
         //find user that scan the code
