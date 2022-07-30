@@ -6,7 +6,7 @@ const qrcode = require("qrcode");
 exports.generate = async (req, res, next)=>{
     try{
         const { userId } = req.body;
-    const user = await User.findById({ userId: userId });
+    const user = await User.findById(userId);
     if(!user){
         return res.status(401).json({
             message: "No user with such Id is found !!!"
@@ -18,7 +18,7 @@ exports.generate = async (req, res, next)=>{
     if(!qrExist){
         await Qrcode.save();
     }else{
-        await Qrcode.findByIdAndUpdate({ userId: userId }, { $set: { disabled: true }});
+        await Qrcode.findByIdAndUpdate(userId, { $set: { disabled: true }});
         await Qrcode.save({ userId });
     }
     //generate encrypted data
